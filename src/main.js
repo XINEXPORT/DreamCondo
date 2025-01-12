@@ -16,13 +16,13 @@ k.loadSprite("spritesheet", "/tilesets/sprite.png", {
   sliceY: 31,
   anims: {
     "idle-down": 992,
-    "walk-down": { from: 992, to: 995, loop: true, speed: 8 },
+    "walk-down": { from: 992, to: 994, loop: true, speed: 8 },
 
     "idle-side": 1030,
     "walk-side": { from: 1030, to: 1033, loop: true, speed: 8 },
 
     "idle-up": 1070,
-    "walk-up": { from: 1070, to: 1073, loop: true, speed: 8 },
+    "walk-up": { from: 1070, to: 1072, loop: true, speed: 8 },
   },
 });
 
@@ -53,8 +53,18 @@ k.scene("main", async () => {
   
 
   for (const layer of layers) {
-    if (layer.name === "boundaries") {
+    console.log(`Layer loaded: ${layer.name}, Type: ${layer.type}, Visible: ${layer.visible}`);
+
+    if (layer.name === "boundaries" && layer.type === "objectgroup") {
+      if (!layer.objects || layer.objects.length === 0) {
+          console.warn("No boundary objects found in the 'boundaries' layer.");
+          continue;
+      }
+
+
       for (const boundary of layer.objects) {
+        console.log(`Adding boundary: ${boundary.name} at (${boundary.x}, ${boundary.y}) with size (${boundary.width}x${boundary.height})`);
+
         map.add([
           k.area({ shape: new k.Rect(k.vec2(0), boundary.width, boundary.height) }),
           k.body({ isStatic: true }),
@@ -63,13 +73,24 @@ k.scene("main", async () => {
         ]);
 
         if (boundary.name) {
+          console.log(`Setting up collision for: ${boundary.name}`);
+      
           player.onCollide(boundary.name, () => {
-            if (!player.isInDialogue) {
-              player.isInDialogue = true;
-              displayDialogue(dialogueData[boundary.name], () => (player.isInDialogue = false));
-            }
+              if (!player.isInDialogue) {
+                  player.isInDialogue = true;
+      
+                  if (dialogueData[boundary.name]) {
+                      console.log(`Displaying dialogue for: ${boundary.name}`);
+                      displayDialogue(dialogueData[boundary.name], () => (player.isInDialogue = false));
+                  } else {
+                      console.warn(`No dialogue found for: ${boundary.name}`);
+                      player.isInDialogue = false;
+                  }
+              }
           });
-        }
+      } else {
+          console.warn("Boundary object missing a name property.");
+      }
       }
       continue;
     }

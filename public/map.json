@@ -208,7 +208,7 @@
                 {
                  "height":174,
                  "id":16,
-                 "name":"livingroom_left-wall",
+                 "name":"livingroom_left_wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -241,7 +241,7 @@
                 {
                  "height":33,
                  "id":19,
-                 "name":"bedroom_front-wall",
+                 "name":"bedroom_front_wall",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -252,7 +252,7 @@
                 {
                  "height":4.5,
                  "id":20,
-                 "name":"livingroom_front-wall-1",
+                 "name":"livingroom_front_wall_1",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -263,7 +263,7 @@
                 {
                  "height":4.5,
                  "id":21,
-                 "name":"livingroom_front-wall-2",
+                 "name":"livingroom_front_wall_2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -274,7 +274,7 @@
                 {
                  "height":46.5,
                  "id":22,
-                 "name":"hallway-top",
+                 "name":"hallway_top",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -285,7 +285,7 @@
                 {
                  "height":77.5,
                  "id":23,
-                 "name":"hallway-bottom",
+                 "name":"hallway_bottom",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -295,7 +295,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -404,7 +404,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
