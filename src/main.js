@@ -10,24 +10,22 @@ k.loadSprite("blue", "/tilesets/blue.png");
 k.loadSprite("map", "/map.png");
 
 
-// spritesheet path
+//spritesheet path
 k.loadSprite("spritesheet", "/tilesets/sprite.png", {
   sliceX: 39,
   sliceY: 31,
   anims: {
-    "idle-down": 1070,
-    "walk-down": { from: 1070, to: 1071, loop: true, speed: 8 },
+    "idle-down": 992,
+    "walk-down": { from: 992, to: 995, loop: true, speed: 8 },
 
-    "idle-side": 1071,
-    "walk-side": { from: 1071, to: 1072, loop: true, speed: 8 },
+    "idle-side": 1030,
+    "walk-side": { from: 1030, to: 1033, loop: true, speed: 8 },
 
-    "idle-up": 1072,
-    "walk-up": { from: 1072, to: 1073, loop: true, speed: 8 },
+    "idle-up": 1070,
+    "walk-up": { from: 1070, to: 1073, loop: true, speed: 8 },
   },
 });
 
-
-k.loadSprite("map", "./map.png");
 
 k.setBackground(k.Color.fromHex("#311047"));
 
@@ -100,42 +98,67 @@ k.scene("main", async () => {
     if (mouseBtn !== "left" || player.isInDialogue) return;
 
     const worldMousePos = k.toWorld(k.mousePos());
-    const direction = worldMousePos.sub(player.pos).unit();
-    player.move(direction.scale(player.speed));
+    player.moveTo(worldMousePos, player.speed);
 
     const mouseAngle = player.pos.angle(worldMousePos);
+
     const lowerBound = 50;
     const upperBound = 125;
 
-    if (mouseAngle > lowerBound && mouseAngle < upperBound) {
+    if (
+      mouseAngle > lowerBound &&
+      mouseAngle < upperBound &&
+      player.curAnim() !== "walk-up"
+    ) {
       player.play("walk-up");
       player.direction = "up";
-    } else if (mouseAngle < -lowerBound && mouseAngle > -upperBound) {
+      return;
+    }
+
+    if (
+      mouseAngle < -lowerBound &&
+      mouseAngle > -upperBound &&
+      player.curAnim() !== "walk-down"
+    ) {
       player.play("walk-down");
       player.direction = "down";
-    } else if (Math.abs(mouseAngle) > upperBound) {
+      return;
+    }
+
+    
+    if (Math.abs(mouseAngle) > upperBound) {
       player.flipX = false;
-      player.play("walk-side");
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
       player.direction = "right";
-    } else if (Math.abs(mouseAngle) < lowerBound) {
+      return;
+    }
+
+    if (Math.abs(mouseAngle) < lowerBound) {
       player.flipX = true;
-      player.play("walk-side");
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
       player.direction = "left";
+      return;
     }
   });
 
   function stopAnims() {
-    const idleAnim = {
-      down: "idle-down",
-      up: "idle-up",
-      left: "idle-side",
-      right: "idle-side",
-    };
-    player.play(idleAnim[player.direction]);
+    if (player.direction === "down") {
+      player.play("idle-down");
+      return;
+    }
+    if (player.direction === "up") {
+      player.play("idle-up");
+      return;
+    }
+
+    player.play("idle-side");
   }
 
   k.onMouseRelease(stopAnims);
-  k.onKeyRelease(stopAnims);
+
+  k.onKeyRelease(() => {
+    stopAnims();
+  });
 
   k.onKeyDown(() => {
     const keyMap = [
@@ -145,24 +168,44 @@ k.scene("main", async () => {
       k.isKeyDown("down"),
     ];
 
-    if (keyMap.filter(Boolean).length > 1 || player.isInDialogue) return;
-
-    const directions = ["right", "left", "up", "down"];
-    const moves = [
-      () => player.move(player.speed, 0),
-      () => player.move(-player.speed, 0),
-      () => player.move(0, -player.speed),
-      () => player.move(0, player.speed),
-    ];
-
-    keyMap.forEach((pressed, i) => {
-      if (pressed) {
-        player.flipX = directions[i] === "left";
-        player.play(`walk-${directions[i]}`);
-        player.direction = directions[i];
-        moves[i]();
+    let nbOfKeyPressed = 0;
+    for (const key of keyMap) {
+      if (key) {
+        nbOfKeyPressed++;
       }
-    });
+    }
+
+    if (nbOfKeyPressed > 1) return;
+
+    if (player.isInDialogue) return;
+    if (keyMap[0]) {
+      player.flipX = false;
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
+      player.direction = "right";
+      player.move(player.speed, 0);
+      return;
+    }
+
+    if (keyMap[1]) {
+      player.flipX = true;
+      if (player.curAnim() !== "walk-side") player.play("walk-side");
+      player.direction = "left";
+      player.move(-player.speed, 0);
+      return;
+    }
+
+    if (keyMap[2]) {
+      if (player.curAnim() !== "walk-up") player.play("walk-up");
+      player.direction = "up";
+      player.move(0, -player.speed);
+      return;
+    }
+
+    if (keyMap[3]) {
+      if (player.curAnim() !== "walk-down") player.play("walk-down");
+      player.direction = "down";
+      player.move(0, player.speed);
+    }
   });
 });
 
