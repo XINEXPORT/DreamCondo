@@ -1,4 +1,2 @@
 # Dream Condo Portfolio Game
-![condo](https://github.com/user-attachments/assets/c04916ad-5515-47f1-9d1b-53fd991f0ecb)
-
-
+![maplarge](https://github.com/user-attachments/assets/d866ddd1-e047-404d-8133-f6983b8c6c06)
