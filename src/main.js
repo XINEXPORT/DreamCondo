@@ -9,19 +9,23 @@ k.loadSprite("xtra_teal", "/tilesets/xtra_teal.png");
 k.loadSprite("blue", "/tilesets/blue.png");
 k.loadSprite("map", "/map.png");
 
+
 // spritesheet path
 k.loadSprite("spritesheet", "/tilesets/sprite.png", {
   sliceX: 39,
   sliceY: 31,
   anims: {
-    "idle-down": 936,
-    "walk-down": { from: 936, to: 939, loop: true, speed: 8 },
-    "idle-side": 975,
-    "walk-side": { from: 975, to: 978, loop: true, speed: 8 },
-    "idle-up": 1014,
-    "walk-up": { from: 1014, to: 1017, loop: true, speed: 8 },
+    "idle-down": 1070,
+    "walk-down": { from: 1070, to: 1071, loop: true, speed: 8 },
+
+    "idle-side": 1071,
+    "walk-side": { from: 1071, to: 1072, loop: true, speed: 8 },
+
+    "idle-up": 1072,
+    "walk-up": { from: 1072, to: 1073, loop: true, speed: 8 },
   },
 });
+
 
 k.loadSprite("map", "./map.png");
 
@@ -38,7 +42,7 @@ k.scene("main", async () => {
     k.scale(scaleFactor),   
   ]);
   
-  const player = k.make([
+  const player = k.add([
     k.sprite("spritesheet", { anim: "idle-down" }),
     k.area({ shape: new k.Rect(k.vec2(0, 3), 10, 10) }),
     k.body(),
@@ -48,6 +52,7 @@ k.scene("main", async () => {
     { speed: 250, direction: "down", isInDialogue: false },
     "player",
   ]);
+  
 
   for (const layer of layers) {
     if (layer.name === "boundaries") {
