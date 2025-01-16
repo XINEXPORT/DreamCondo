@@ -25,10 +25,11 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":20,
          "id":1,
+         "locked":true,
          "name":"Tile Layer 1",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -56,10 +57,11 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":20,
          "id":2,
+         "locked":true,
          "name":"Tile Layer pink",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -87,10 +89,11 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":20,
          "id":3,
+         "locked":true,
          "name":"Tile Layer Teal",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -118,10 +121,11 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":20,
          "id":4,
+         "locked":true,
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -149,10 +153,11 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":20,
          "id":6,
+         "locked":true,
          "name":"props",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -184,7 +189,7 @@
          "name":"small props",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -295,13 +300,14 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
         {
          "draworder":"topdown",
          "id":23,
+         "locked":true,
          "name":"props",
          "objects":[
                 {
@@ -350,7 +356,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -380,7 +386,7 @@
          "name":"architecture",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":27,
          "x":0,
          "y":0
@@ -388,6 +394,7 @@
         {
          "draworder":"topdown",
          "id":13,
+         "locked":true,
          "name":"spawnpoint",
          "objects":[
                 {
@@ -404,7 +411,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
@@ -417,23 +424,23 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"/tilesets/sprite_pink.tsx"
+         "source":"Sprite Pink.tsx"
         }, 
         {
          "firstgid":1210,
-         "source":"/tilesets/sprite.tsx"
+         "source":"sprite.tsx"
         }, 
         {
          "firstgid":2419,
-         "source":"/tilesets/sprite_teal.tsx"
+         "source":"Sprite Teal.tsx"
         }, 
         {
          "firstgid":3628,
-         "source":"/tilesets/xtra_teal.tsx"
+         "source":"xtra teal.tsx"
         }, 
         {
          "firstgid":4837,
-         "source":"/tilesets/blue.tsx"
+         "source":"blue.tsx"
         }],
  "tilewidth":16,
  "type":"map",

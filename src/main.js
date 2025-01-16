@@ -2,7 +2,7 @@ import { dialogueData, scaleFactor } from "./constants";
 import { k } from "./kaboomCtx";
 import { displayDialogue, setCamScale } from "./utils";
 
-// Load Sprites
+
 k.loadSprite("sprite_pink", "/tilesets/sprite_pink.png");
 k.loadSprite("sprite_teal", "/tilesets/sprite_teal.png");
 k.loadSprite("xtra_teal", "/tilesets/xtra_teal.png");
@@ -10,7 +10,7 @@ k.loadSprite("blue", "/tilesets/blue.png");
 k.loadSprite("map", "/map.png");
 
 
-//spritesheet path
+
 k.loadSprite("spritesheet", "/tilesets/sprite.png", {
   sliceX: 39,
   sliceY: 31,
@@ -27,7 +27,7 @@ k.loadSprite("spritesheet", "/tilesets/sprite.png", {
 });
 
 
-k.setBackground(k.Color.fromHex("#311047"));
+// k.setBackground(k.Color.fromHex("#311047"));
 
 k.scene("main", async () => {
   const mapData = await (await fetch("./map.json")).json();
@@ -65,6 +65,14 @@ k.scene("main", async () => {
       for (const boundary of layer.objects) {
         console.log(`Adding boundary: ${boundary.name} at (${boundary.x}, ${boundary.y}) with size (${boundary.width}x${boundary.height})`);
 
+        k.add([
+          k.rect(boundary.width, boundary.height),
+          k.color(k.Color.fromHex("ff0000")), 
+          k.outline(2, k.Color.fromHex("ff0000")), 
+          k.pos(boundary.x * scaleFactor, boundary.y * scaleFactor),
+          k.opacity(0.6),
+        ]);
+        
         map.add([
           k.area({ shape: new k.Rect(k.vec2(0), boundary.width, boundary.height) }),
           k.body({ isStatic: true }),
